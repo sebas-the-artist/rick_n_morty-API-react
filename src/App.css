@@ -11,6 +11,7 @@
 .home {
   background-color: #cacaca;
   height: 90vh;
+  height: 85vh;
 }
 
 ::selection {
@@ -65,8 +66,12 @@ nav,
   color: whitesmoke;
   width: 100%;
   width: 100vw;
-  padding: 8px 0;
+  /*padding: 8px 0;*/
+  height: 5vh;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #intro__landing {
@@ -131,6 +136,7 @@ nav,
   color: rgb(95, 212, 252);
   color: black;
   -webkit-text-stroke: 1px limegreen;
+  -webkit-text-stroke: 1px rgb(121, 252, 111);
 }
 .intro__para {
   font-size: 24px;
@@ -196,6 +202,7 @@ nav,
 .intro__landing__search--bar--wrapper {
   display: flex;
   justify-content: center;
+  padding: 0 80px;
 }
 
 /* cd  leaves */
@@ -370,6 +377,9 @@ nav {
   align-items: center;
 
   background-image: url("./assets/space__bg.jpeg");
+}
+
+#nav {
 }
 
 .nav {

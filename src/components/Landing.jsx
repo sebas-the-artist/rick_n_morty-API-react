@@ -11,7 +11,7 @@ function Landing() {
               New Episode Released! Check out "The Ricklantis Mixup"
             </p>
           </div>
-          <h1 className="intro__header">Complete Character Guide</h1>
+          <h1 className="intro__header">A Complete Character Guide</h1>
           <p className="intro__para">
             It's time to get Schwifty! Explore the vast multiverse of Rick and
             Morty™
