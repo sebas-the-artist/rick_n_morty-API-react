@@ -1,0 +1,98 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function CharacterDetail() {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCharacter(data);
+
+        // Only take the first 4 episode URLs
+        const episodeIds = data.episode
+          .slice(0, 4)
+          .map((url) => url.split("/").pop());
+
+        // Fetch those episodes
+        if (episodeIds.length > 0) {
+          fetch(
+            `https://rickandmortyapi.com/api/episode/${episodeIds.join(",")}`
+          )
+            .then((res) => res.json())
+            .then((episodesData) => {
+              setEpisodes(
+                Array.isArray(episodesData) ? episodesData : [episodesData]
+              );
+            });
+        }
+      })
+      .catch((err) => console.error("Error fetching character details:", err));
+  }, [id]);
+
+  if (!character) return <div>Loading...</div>;
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>{character.name}</h2>
+      <img src={character.image} alt={character.name} />
+      <p>Status: {character.status}</p>
+      <p>Species: {character.species}</p>
+      <p>Origin: {character.origin.name}</p>
+      <p>Location: {character.location.name}</p>
+
+      <h3>Episodes Appeared In (first 4):</h3>
+      <ul>
+        {episodes.map((ep) => (
+          <li key={ep.id}>
+            {ep.episode} - {ep.name} ({ep.air_date})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default CharacterDetail;
+
+//before adding the apisodes- capped them at 4
+/* import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function CharacterDetail() {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((data) => setCharacter(data))
+      .catch(() => setCharacter(null));
+  }, [id]);
+
+  if (!character) return <p>Loading character details...</p>;
+
+  return (
+    <div className="character-detail">
+      <div className="detail__wrapper">
+        <div className="detail__img--wrapper">
+          <img src={character.image} alt={character.name} />
+        </div>
+        <div className="detail__info--wrapper">
+          <h2 className="detail__name detail__info">{character.name}</h2>
+          <p className="detail__info">Status: {character.status}</p>
+          <p className="detail__info">Species: {character.species}</p>
+          <p className="detail__info">Gender: {character.gender}</p>
+          <p className="detail__info">Origin: {character.origin.name}</p>
+          <p className="detail__info">Location: {character.location.name}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CharacterDetail;
+ */

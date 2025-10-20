@@ -27,10 +27,10 @@ const Nav = () => {
             <Link to="/" className="nav__link">
               Home
             </Link>
-            <Link to="/" className="nav__link">
+            <Link to="/Explore" className="nav__link">
               Explore
             </Link>
-            <Link to="/" className="nav__link">
+            <Link to="/Explore" className="nav__link">
               Wander
             </Link>
           </div>

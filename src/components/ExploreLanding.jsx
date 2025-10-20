@@ -1,4 +1,5 @@
 import React from "react";
+import CharacterSearch from "../components/CharacterSearch";
 
 const ExploreLanding = () => {
   return (
@@ -7,13 +8,17 @@ const ExploreLanding = () => {
         <div className="explore__landing">
           <h1 className="explore__landing--header">Explore the Multiverse</h1>
           <div className="search__bar--wrapper">
+            <CharacterSearch />
+          </div>
+
+          {/* <div className="search__bar--wrapper">
             <input
               type="text"
               className="explore__search--bar"
-              placeholder="MR. Meeseeks"
+              placeholder="Hamurai"
             />
             <button className="explore__search--btn">Search</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
