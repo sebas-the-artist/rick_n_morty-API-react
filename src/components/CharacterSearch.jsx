@@ -49,7 +49,7 @@ function CharacterSearch() {
 
   return (
     <div
-      style={{ maxWidth: 600, margin: "auto" }}
+      //style={{ maxWidth: 600, margin: "auto" }}
       className="character__search--wrapper"
     >
       <input
@@ -66,6 +66,7 @@ function CharacterSearch() {
         style={{
           display: "flex",
           flexWrap: "wrap",
+
           gap: 15,
           marginTop: 10,
         }}

@@ -77,23 +77,25 @@ function CharacterList() {
       </div>
 
       <div className="character-page">
-        <div className="character-container">
-          {filteredCharacters.map((character) => (
-            <Link
-              to={`/character/${character.id}`}
-              key={character.id}
-              className="character-card-link"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div className="character-card">
-                <img src={character.image} alt={character.name} />
-                <h3>{character.name}</h3>
-                <p>Status: {character.status}</p>
-                <p>Species: {character.species}</p>
-                <p>Origin: {character.origin.name}</p>
-              </div>
-            </Link>
-          ))}
+        <div className="wrapper__2--grey">
+          <div className="character-container">
+            {filteredCharacters.map((character) => (
+              <Link
+                to={`/character/${character.id}`}
+                key={character.id}
+                className="character-card-link"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className="character-card">
+                  <img src={character.image} alt={character.name} />
+                  <h3>{character.name}</h3>
+                  <p>Status: {character.status}</p>
+                  <p>Species: {character.species}</p>
+                  <p>Origin: {character.origin.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Pagination */}
