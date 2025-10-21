@@ -66,7 +66,6 @@ function CharacterSearch() {
         style={{
           display: "flex",
           flexWrap: "wrap",
-
           gap: 15,
           marginTop: 10,
         }}
@@ -99,7 +98,7 @@ function CharacterSearch() {
               <h3>{character.name}</h3>
               <p>{character.status}</p>
               <p>{character.species}</p>
-              <p>From: {character.origin.name}</p>
+              <p>{character.gender}</p>
             </div>
           </Link>
         ))}

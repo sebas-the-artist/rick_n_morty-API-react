@@ -974,11 +974,76 @@ k */
 
 .detail__wrapper {
   display: flex;
-  justify-content: center;
+  display: flex;
+  flex-direction: column; /* Stack title above content */
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.detail__name--wrapper {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  /*  text-align: center;
+  display: flex;
+  justify-content: center; */
+}
+.detail__name--wrapper h2 {
+  font-size: 2rem;
+  margin-right: 10px;
 }
 
 .detail__info {
   padding: 8px 0;
+}
+.detail__type {
+  font-size: 1.2rem;
+  color: #9dfc92;
+}
+.detail__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  gap: 40px;
+}
+.detail__info--wrapper {
+  background: #222;
+  border-radius: 10px;
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  color: white;
+}
+.detail__episodes {
+  background: #111;
+  border-radius: 10px;
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  color: white;
+}
+
+.detail__img {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 250px;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.detailed__details p {
+  margin: 8px 0;
+}
+
+.detail__img--details--wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 /* 

@@ -5,6 +5,256 @@ function CharacterDetail() {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
   const [episodes, setEpisodes] = useState([]);
+  const [firstSeen, setFirstSeen] = useState(null);
+  const [lastSeen, setLastSeen] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCharacter(data);
+
+        const episodeIds = data.episode
+          .slice(0, 4)
+          .map((url) => url.split("/").pop());
+
+        // Fetch first 4 episodes
+        if (episodeIds.length > 0) {
+          fetch(
+            `https://rickandmortyapi.com/api/episode/${episodeIds.join(",")}`
+          )
+            .then((res) => res.json())
+            .then((episodesData) =>
+              setEpisodes(
+                Array.isArray(episodesData) ? episodesData : [episodesData]
+              )
+            );
+        }
+
+        // Fetch first and last appearances
+        if (data.episode.length > 0) {
+          const firstEpUrl = data.episode[0];
+          const lastEpUrl = data.episode[data.episode.length - 1];
+
+          Promise.all([fetch(firstEpUrl), fetch(lastEpUrl)])
+            .then(async ([firstRes, lastRes]) => {
+              const firstEp = await firstRes.json();
+              const lastEp = await lastRes.json();
+              setFirstSeen(firstEp);
+              setLastSeen(lastEp);
+            })
+            .catch((err) =>
+              console.error("Error fetching episode details:", err)
+            );
+        }
+      })
+      .catch((err) => console.error("Error fetching character details:", err));
+  }, [id]);
+
+  if (!character) return <div>Loading...</div>;
+
+  return (
+    <div className="detail">
+      <div className="detail__wrapper">
+        {/* NAME SECTION: Centers on top, full width */}
+        <div className="detail__name--wrapper">
+          <h2>{character.name}</h2>
+          {character.type && <h3 className="detail__type">{character.type}</h3>}
+        </div>
+
+        {/* FLEX SPLIT: Details on left / Episodes on right */}
+        <div className="detail__content">
+          <div className="detail__info--wrapper">
+            <div className="detailed__img">
+              <img
+                src={character.image}
+                alt={character.name}
+                className="detail__img"
+              />
+            </div>
+            <div className="detailed__details">
+              <p>
+                <strong>Gender:</strong> {character.gender}
+              </p>
+              <p>
+                <strong>Status:</strong> {character.status}
+              </p>
+              <p>
+                <strong>Species:</strong> {character.species}
+              </p>
+              <p>
+                <strong>Origin:</strong> {character.origin.name}
+              </p>
+              <p>
+                <strong>Last Seen At:</strong> {character.location.name}
+              </p>
+            </div>
+          </div>
+
+          <div className="detail__episodes">
+            <h3>Episodes Appeared In (First 4):</h3>
+            <ul>
+              {episodes.map((ep) => (
+                <li key={ep.id}>
+                  {ep.episode} - {ep.name} ({ep.air_date})
+                </li>
+              ))}
+            </ul>
+
+            {firstSeen && (
+              <p>
+                <strong>First Seen In:</strong> {firstSeen.episode} -{" "}
+                {firstSeen.name} ({firstSeen.air_date})
+              </p>
+            )}
+            {lastSeen && (
+              <p>
+                <strong>Last Seen In:</strong> {lastSeen.episode} -{" "}
+                {lastSeen.name} ({lastSeen.air_date})
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CharacterDetail;
+
+// before improving the css
+/* import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function CharacterDetail() {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
+  const [firstSeen, setFirstSeen] = useState(null);
+  const [lastSeen, setLastSeen] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCharacter(data);
+
+        // Get episode IDs, but only first 4 for the episode list
+        const episodeIds = data.episode
+          .slice(0, 4)
+          .map((url) => url.split("/").pop());
+
+        // Fetch only first 4 episodes
+        if (episodeIds.length > 0) {
+          fetch(
+            `https://rickandmortyapi.com/api/episode/${episodeIds.join(",")}`
+          )
+            .then((res) => res.json())
+            .then((episodesData) => {
+              setEpisodes(
+                Array.isArray(episodesData) ? episodesData : [episodesData]
+              );
+            });
+        }
+
+        // Fetch first and last full episode info
+        if (data.episode.length > 0) {
+          const firstEpUrl = data.episode[0];
+          const lastEpUrl = data.episode[data.episode.length - 1];
+
+          Promise.all([fetch(firstEpUrl), fetch(lastEpUrl)])
+            .then(async ([firstRes, lastRes]) => {
+              const firstEp = await firstRes.json();
+              const lastEp = await lastRes.json();
+              setFirstSeen(firstEp);
+              setLastSeen(lastEp);
+            })
+            .catch((err) =>
+              console.error("Error fetching episode details:", err)
+            );
+        }
+      })
+      .catch((err) => console.error("Error fetching character details:", err));
+  }, [id]);
+
+  if (!character) return <div>Loading...</div>;
+
+  return (
+    <div className="detail">
+      <div className="detail__wrapper">
+        <div className="detail__name--wrapper">
+          <h2>{character.name}</h2>
+          <h2>{character.type}</h2>
+        </div>
+        <div className="detail__img--details--wrapper">
+          <div style={{ padding: "20px" }}>
+            <div className="detailed__img">
+              <img
+                src={character.image}
+                alt={character.name}
+                style={{ borderRadius: "10px", marginBottom: "1rem" }}
+              />
+            </div>
+            <div className="detailed__details">
+              <p>
+                <strong>Gender:</strong> {character.gender}
+              </p>
+              <p>
+                <strong>Status:</strong> {character.status}
+              </p>
+              <p>
+                <strong>Species:</strong> {character.species}
+              </p>
+              <p>
+                <strong>Origin:</strong> {character.origin.name}
+              </p>
+              <p>
+                <strong>Last Seen At:</strong> {character.location.name}
+              </p>
+            </div>
+          </div>
+
+          <div className="detail__episodes">
+            <h3>Episodes Appeared In (First 4):</h3>
+            <ul>
+              {episodes.map((ep) => (
+                <li key={ep.id}>
+                  {ep.episode} - {ep.name} ({ep.air_date})
+                </li>
+              ))}
+            </ul>
+            <br />
+
+            {firstSeen && (
+              <p>
+                <strong>First Seen In:</strong> {firstSeen.episode} -{" "}
+                {firstSeen.name} ({firstSeen.air_date})
+              </p>
+            )}
+
+            {lastSeen && (
+              <p>
+                <strong>Last Seen In:</strong> {lastSeen.episode} -{" "}
+                {lastSeen.name} ({lastSeen.air_date})
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CharacterDetail; */
+
+//befor eadding the first and last episodes
+/* import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+function CharacterDetail() {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
 
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
@@ -39,10 +289,11 @@ function CharacterDetail() {
     <div style={{ padding: "20px" }}>
       <h2>{character.name}</h2>
       <img src={character.image} alt={character.name} />
+      <p>Gender: {character.gender}</p>
       <p>Status: {character.status}</p>
       <p>Species: {character.species}</p>
       <p>Origin: {character.origin.name}</p>
-      <p>Location: {character.location.name}</p>
+      <p>Last Seen: {character.location.name}</p>
 
       <h3>Episodes Appeared In (first 4):</h3>
       <ul>
@@ -56,7 +307,7 @@ function CharacterDetail() {
   );
 }
 
-export default CharacterDetail;
+export default CharacterDetail; */
 
 //before adding the apisodes- capped them at 4
 /* import React, { useEffect, useState } from "react";
