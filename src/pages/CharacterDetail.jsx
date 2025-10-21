@@ -18,7 +18,6 @@ function CharacterDetail() {
           .slice(0, 4)
           .map((url) => url.split("/").pop());
 
-        // Fetch first 4 episodes
         if (episodeIds.length > 0) {
           fetch(
             `https://rickandmortyapi.com/api/episode/${episodeIds.join(",")}`
@@ -31,7 +30,6 @@ function CharacterDetail() {
             );
         }
 
-        // Fetch first and last appearances
         if (data.episode.length > 0) {
           const firstEpUrl = data.episode[0];
           const lastEpUrl = data.episode[data.episode.length - 1];
@@ -43,12 +41,10 @@ function CharacterDetail() {
               setFirstSeen(firstEp);
               setLastSeen(lastEp);
             })
-            .catch((err) =>
-              console.error("Error fetching episode details:", err)
-            );
+            .catch(console.error);
         }
       })
-      .catch((err) => console.error("Error fetching character details:", err));
+      .catch(console.error);
   }, [id]);
 
   if (!character) return <div>Loading...</div>;
@@ -56,57 +52,51 @@ function CharacterDetail() {
   return (
     <div className="detail">
       <div className="detail__wrapper">
-        {/* NAME SECTION: Centers on top, full width */}
+        {/* Name centered on top */}
         <div className="detail__name--wrapper">
           <h2>{character.name}</h2>
           {character.type && <h3 className="detail__type">{character.type}</h3>}
         </div>
 
-        {/* FLEX SPLIT: Details on left / Episodes on right */}
+        {/* Main content flex container */}
         <div className="detail__content">
-          <div className="detail__info--wrapper">
-            <div className="detailed__img">
-              <img
-                src={character.image}
-                alt={character.name}
-                className="detail__img"
-              />
-            </div>
-            <div className="detailed__details">
-              <p>
-                <strong>Gender:</strong> {character.gender}
-              </p>
-              <p>
-                <strong>Status:</strong> {character.status}
-              </p>
-              <p>
-                <strong>Species:</strong> {character.species}
-              </p>
-              <p>
-                <strong>Origin:</strong> {character.origin.name}
-              </p>
-              <p>
-                <strong>Last Seen At:</strong> {character.location.name}
-              </p>
+          {/* Left side: vertical stack of image then episodes */}
+          <div className="detail__left">
+            <img
+              src={character.image}
+              alt={character.name}
+              className="detail__img"
+            />
+
+            <div className="detail__episodes">
+              <h3>Episodes Appeared In (First 4):</h3>
+              <ul>
+                {episodes.map((ep) => (
+                  <li key={ep.id}>
+                    {ep.episode} - {ep.name} ({ep.air_date})
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="detail__episodes">
-            <h3>Episodes Appeared In (First 4):</h3>
-            <ul>
-              {episodes.map((ep) => (
-                <li key={ep.id}>
-                  {ep.episode} - {ep.name} ({ep.air_date})
-                </li>
-              ))}
-            </ul>
-
-            {firstSeen && (
-              <p>
-                <strong>First Seen In:</strong> {firstSeen.episode} -{" "}
-                {firstSeen.name} ({firstSeen.air_date})
-              </p>
-            )}
+          {/* Right side: character info */}
+          <div className="detail__right">
+            <p>
+              <strong>Gender:</strong> {character.gender}
+            </p>
+            <p>
+              <strong>Status:</strong> {character.status}
+            </p>
+            <p>
+              <strong>Species:</strong> {character.species}
+            </p>
+            <p>
+              <strong>Origin:</strong> {character.origin.name}
+            </p>
+            <p>
+              <strong>Last Seen At:</strong> {character.location.name}
+            </p>
             {lastSeen && (
               <p>
                 <strong>Last Seen In:</strong> {lastSeen.episode} -{" "}
@@ -114,6 +104,25 @@ function CharacterDetail() {
               </p>
             )}
           </div>
+        </div>
+
+        <div className="detail__about">
+          <h2>About {character.name}</h2>
+          <p>
+            {character.name} is a(n) {character.species} character originally
+            from {character.origin?.name || "Unknown"}. Known for something cool
+            probably if you're reading about them, the database I used doesn't
+            have a bio so I'm "mad libbing" it. {character.name} first appeared
+            in the episode "{firstSeen?.name || "Unknown"}" way back on{" "}
+            {firstSeen?.air_date || "Unknown"}.
+          </p>
+          {/* <p>
+            {character.name} is a(n) {character.species} character originally from
+            {character.origin.name}. Known for something interesting probably if
+            your reading about them, the database i used for this doesnt have a
+            bio so im just "mad libbing" it. {character.name} first appeared in
+            the episode "{firstSeen.name}" way back on {firstSeen.air_date}
+          </p> */}
         </div>
       </div>
     </div>

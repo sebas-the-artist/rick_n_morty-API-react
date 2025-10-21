@@ -12,10 +12,10 @@ function Landing() {
             </p>
           </div>
           <h1 className="intro__header">A Complete Character Guide</h1>
-          <p className="intro__para">
+          {/* <p className="intro__para">
             It's time to get Schwifty! Explore the vast multiverse of Rick and
             Morty™
-          </p>
+          </p> */}
         </div>
         <div className="intro__landing__search--bar--wrapper">
           <input
