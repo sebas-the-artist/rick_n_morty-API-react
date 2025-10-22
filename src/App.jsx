@@ -4,6 +4,15 @@ import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Explore from "./pages/Explore.jsx";
 import CharacterDetail from "./pages/CharacterDetail.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleXmark,
+  faCircleHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
+
 /* import CharacterSearch from "./components/CharacterSearch.jsx"; */
 
 function App() {

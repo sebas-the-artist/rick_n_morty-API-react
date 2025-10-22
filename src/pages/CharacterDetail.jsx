@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleXmark,
+  faCircleHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
+import DetailBack from "../components/DetailBack";
 
 function CharacterDetail() {
   const { id } = useParams();
@@ -51,6 +57,9 @@ function CharacterDetail() {
 
   return (
     <div className="detail">
+      {/* Insert your back + dark mode toggle button here */}
+      <DetailBack />
+
       <div className="detail__wrapper">
         {/* Name centered on top */}
         <div className="detail__name--wrapper">
@@ -92,6 +101,140 @@ function CharacterDetail() {
               <strong>Species:</strong> {character.species}
             </p>
             <p>
+              <strong>Origin:</strong> {character.origin?.name || "Unknown"}
+            </p>
+            <p>
+              <strong>Last Seen At:</strong>{" "}
+              {character.location?.name || "Unknown"}
+            </p>
+            {lastSeen && (
+              <p>
+                <strong>Last Seen In:</strong> {lastSeen.episode} -{" "}
+                {lastSeen.name} ({lastSeen.air_date})
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="detail__about">
+          <h2>About {character.name}</h2>
+          <p>
+            {character.name} is a(n) {character.species} character originally
+            from {character.origin?.name || "Unknown"}. Known for something cool
+            probably if you're reading about them, the database I used doesn't
+            have a bio so I'm "mad libbing" it. {character.name} first appeared
+            in the episode "{firstSeen?.name || "Unknown"}" way back on{" "}
+            {firstSeen?.air_date || "Unknown"}.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CharacterDetail;
+
+//beforeadding the dark mode to the detail page
+/* import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleXmark,
+  faCircleHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import DetailBack from "../components/DetailBack";
+
+function CharacterDetail() {
+  const { id } = useParams();
+  const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
+  const [firstSeen, setFirstSeen] = useState(null);
+  const [lastSeen, setLastSeen] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCharacter(data);
+
+        const episodeIds = data.episode
+          .slice(0, 4)
+          .map((url) => url.split("/").pop());
+
+        if (episodeIds.length > 0) {
+          fetch(
+            `https://rickandmortyapi.com/api/episode/${episodeIds.join(",")}`
+          )
+            .then((res) => res.json())
+            .then((episodesData) =>
+              setEpisodes(
+                Array.isArray(episodesData) ? episodesData : [episodesData]
+              )
+            );
+        }
+
+        if (data.episode.length > 0) {
+          const firstEpUrl = data.episode[0];
+          const lastEpUrl = data.episode[data.episode.length - 1];
+
+          Promise.all([fetch(firstEpUrl), fetch(lastEpUrl)])
+            .then(async ([firstRes, lastRes]) => {
+              const firstEp = await firstRes.json();
+              const lastEp = await lastRes.json();
+              setFirstSeen(firstEp);
+              setLastSeen(lastEp);
+            })
+            .catch(console.error);
+        }
+      })
+      .catch(console.error);
+  }, [id]);
+
+  if (!character) return <div>Loading...</div>;
+
+  return (
+    <div className="detail">
+      <DetailBack />
+      <div className="detail__wrapper">
+    
+        <div className="detail__name--wrapper">
+          <h2>{character.name}</h2>
+          {character.type && <h3 className="detail__type">{character.type}</h3>}
+        </div>
+
+       
+        <div className="detail__content">
+          
+          <div className="detail__left">
+            <img
+              src={character.image}
+              alt={character.name}
+              className="detail__img"
+            />
+
+            <div className="detail__episodes">
+              <h3>Episodes Appeared In (First 4):</h3>
+              <ul>
+                {episodes.map((ep) => (
+                  <li key={ep.id}>
+                    {ep.episode} - {ep.name} ({ep.air_date})
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="detail__right">
+            <p>
+              <strong>Gender:</strong> {character.gender}
+            </p>
+            <p>
+              <strong>Status:</strong> {character.status}
+            </p>
+            <p>
+              <strong>Species:</strong> {character.species}
+            </p>
+            <p>
               <strong>Origin:</strong> {character.origin.name}
             </p>
             <p>
@@ -116,13 +259,7 @@ function CharacterDetail() {
             in the episode "{firstSeen?.name || "Unknown"}" way back on{" "}
             {firstSeen?.air_date || "Unknown"}.
           </p>
-          {/* <p>
-            {character.name} is a(n) {character.species} character originally from
-            {character.origin.name}. Known for something interesting probably if
-            your reading about them, the database i used for this doesnt have a
-            bio so im just "mad libbing" it. {character.name} first appeared in
-            the episode "{firstSeen.name}" way back on {firstSeen.air_date}
-          </p> */}
+          
         </div>
       </div>
     </div>
@@ -130,6 +267,10 @@ function CharacterDetail() {
 }
 
 export default CharacterDetail;
+ */
+//
+//
+//
 
 // before improving the css
 /* import React, { useEffect, useState } from "react";
