@@ -66,7 +66,7 @@ function Landing() {
             type="text"
             className="intro__landing__search--bar"
             id="searchInput"
-            placeholder="morty"
+            placeholder="Mr. Meeseeks"
             value={inputValue}
             onChange={handleChange}
             onKeyDown={handleKeyDown} // detect Enter key
