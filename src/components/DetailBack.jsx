@@ -20,7 +20,7 @@ const DetailBack = () => {
   };
 
   return (
-    <div>
+    <div className="detail__back--wrapper">
       <div className="detail__back">
         <button
           className="detail__button back__button"
