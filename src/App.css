@@ -118,7 +118,7 @@ nav,
 /* Scrolling text */
 .news__bar--p {
   display: inline-block;
-  animation: scroll-text 150s linear infinite;
+  animation: scroll-text 120s linear infinite;
   font-size: 1rem;
   font-weight: 500;
   padding-left: 100%;
@@ -164,6 +164,15 @@ nav,
   filter: brightness(1.2);
 }
 
+.intro__landing__search--portal {
+  width: 0px;
+  transition: all 200ms ease-in-out;
+}
+.intro__landing__search--btn:hover .intro__landing__search--portal {
+  animation: spin 1000ms infinite linear;
+  width: 48px;
+}
+
 #intro__landing {
   display: flex;
   flex-direction: column;
@@ -185,6 +194,7 @@ nav,
   /*padding-bottom: 2%;
   padding-bottom: 8%;*/
   padding: 12px 0;
+  padding: 40px 0 20px 0;
 
   max-width: 75%;
   max-width: 95%;
@@ -794,7 +804,6 @@ k */
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-family: "Courier New", Courier, monospace;
-  margin-right: 10px;
 }
 
 .detail__info {
@@ -962,6 +971,7 @@ k */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-items: start;
   width: 100%;
   max-width: 950px;
   /* margin: 20px auto 30px; */
@@ -990,8 +1000,25 @@ k */
   color: white;
 }
 .back__button {
+  width: 32px;
+  transition: all 500ms ease-in-out;
+  text-align: center;
+  /* display: flex; */
+}
+.detail__back:hover .detail__back--portal {
+  width: 31px;
+  opacity: 1;
 }
 
+.detail__back--portal {
+  animation: spin 800ms infinite linear;
+  width: 0;
+  transition: all 500ms ease-in-out;
+  opacity: 0;
+}
+
+.falling {
+}
 /* Dark mode general styling */
 body.dark__mode {
   background-color: #0d0d0d;
@@ -1036,6 +1063,9 @@ body.dark__mode .detail__type {
 body.dark__mode .detail__wrapper,
 body.dark__mode .detail {
   background-image: url(assets/space__bg.jpeg);
+}
+body.dark__mode .falling {
+  color: rgb(95, 212, 252);
 }
 
 /* @media (max-width: 992px) {
@@ -1173,6 +1203,7 @@ body.dark__mode .detail {
   }
   .detail__img {
     width: 150px;
+    margin: 0;
   }
   .detail__right {
     margin-top: 18px;
@@ -1194,6 +1225,9 @@ body.dark__mode .detail {
 
   .intro__landing__search--btn {
     display: none;
+  }
+  .intro__landing__search--bar {
+    width: 80vw;
   }
 
   #filter {

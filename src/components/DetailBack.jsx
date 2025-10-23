@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleXmark,
   faCircleHalfStroke,
+  faPersonRunning,
+  faPersonFalling,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+
+import PortalCircle from "../assets/portal-circle.png";
 
 const DetailBack = () => {
   const navigate = useNavigate();
@@ -27,8 +31,11 @@ const DetailBack = () => {
           onClick={handleBack}
           aria-label="Go back to Explore"
         >
-          {/* <FontAwesomeIcon icon="fa-solid fa-circle-xmark" /> */}
-          <FontAwesomeIcon icon={faCircleXmark} />
+          {/* <FontAwesomeIcon icon={faCircleXmark} /> */}
+          <div className="falling">
+            <FontAwesomeIcon icon={faPersonFalling} />
+          </div>
+          <img src={PortalCircle} className="detail__back--portal" />
         </button>
 
         <button
