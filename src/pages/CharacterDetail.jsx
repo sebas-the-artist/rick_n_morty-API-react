@@ -78,7 +78,9 @@ function CharacterDetail() {
             />
 
             <div className="detail__episodes">
-              <h3>Episodes Appeared In (First 4):</h3>
+              <h3 className="detail__episodes--header">
+                Episodes Appeared In (First 4):
+              </h3>
               <ul>
                 {episodes.map((ep) => (
                   <li key={ep.id}>
@@ -109,8 +111,8 @@ function CharacterDetail() {
             </p>
             {lastSeen && (
               <p>
-                <strong>Last Seen In:</strong> {lastSeen.episode} -{" "}
-                {lastSeen.name} ({lastSeen.air_date})
+                <strong>Last Appearence:</strong> {lastSeen.episode} -{" "}
+                {lastSeen.name} {/* ({lastSeen.air_date}) */}
               </p>
             )}
           </div>

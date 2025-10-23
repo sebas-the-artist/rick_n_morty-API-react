@@ -20,24 +20,26 @@ const DetailBack = () => {
   };
 
   return (
-    <div className="detail__back">
-      <button
-        className="detail__button back__button"
-        onClick={handleBack}
-        aria-label="Go back to Explore"
-      >
-        {/* <FontAwesomeIcon icon="fa-solid fa-circle-xmark" /> */}
-        <FontAwesomeIcon icon={faCircleXmark} />
-      </button>
+    <div>
+      <div className="detail__back">
+        <button
+          className="detail__button back__button"
+          onClick={handleBack}
+          aria-label="Go back to Explore"
+        >
+          {/* <FontAwesomeIcon icon="fa-solid fa-circle-xmark" /> */}
+          <FontAwesomeIcon icon={faCircleXmark} />
+        </button>
 
-      <button
-        className="detail__button dark__mode"
-        onClick={toggleDarkMode}
-        aria-label="Toggle dark mode"
-      >
-        {/* <FontAwesomeIcon icon="fa-solid fa-circle-half-stroke" /> */}
-        <FontAwesomeIcon icon={faCircleHalfStroke} />
-      </button>
+        <button
+          className="detail__button dark__mode"
+          onClick={toggleDarkMode}
+          aria-label="Toggle dark mode"
+        >
+          {/* <FontAwesomeIcon icon="fa-solid fa-circle-half-stroke" /> */}
+          <FontAwesomeIcon icon={faCircleHalfStroke} />
+        </button>
+      </div>
     </div>
   );
 };
