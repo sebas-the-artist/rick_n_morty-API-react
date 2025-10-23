@@ -19,7 +19,7 @@ const Home = () => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    height: "90vh",
+    height: "92vh",
     width: "100%",
     position: "relative",
     overflow: "hidden",

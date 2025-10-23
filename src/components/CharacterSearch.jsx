@@ -1,5 +1,119 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
+import { SearchContext } from "../components/SearchContext";
+
+function CharacterSearch() {
+  const { searchTerm } = useContext(SearchContext);
+  const [query, setQuery] = useState(searchTerm || "");
+  const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchCharacters = useCallback(
+    debounce((searchTerm) => {
+      if (!searchTerm) {
+        setCharacters([]);
+        setLoading(false);
+        setError(null);
+        return;
+      }
+      setLoading(true);
+      fetch(`https://rickandmortyapi.com/api/character/?name=${searchTerm}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("No results");
+          return res.json();
+        })
+        .then((data) => {
+          setCharacters(data.results);
+          setLoading(false);
+          setError(null);
+        })
+        .catch(() => {
+          setCharacters([]);
+          setLoading(false);
+          setError("No characters found");
+        });
+    }, 300),
+    []
+  );
+
+  useEffect(() => {
+    fetchCharacters(query);
+  }, [query, fetchCharacters]);
+
+  function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    };
+  }
+
+  // Automatically search when page loads if user came from Landing
+  useEffect(() => {
+    if (searchTerm && !query) {
+      setQuery(searchTerm);
+    }
+  }, [searchTerm]);
+
+  return (
+    <div className="character__search--wrapper">
+      <input
+        type="text"
+        placeholder="Hamurai"
+        className="explore__search--bar"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        autoFocus
+      />
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div
+        className="character__container"
+        style={{ display: "flex", flexWrap: "wrap", gap: 15, marginTop: 10 }}
+      >
+        {characters.map((character) => (
+          <Link
+            to={`/character/${character.id}`}
+            key={character.id}
+            style={{ textDecoration: "none", color: "inherit", width: 180 }}
+          >
+            <div
+              style={{
+                backgroundColor: "#222",
+                color: "white",
+                borderRadius: 10,
+                padding: 10,
+                textAlign: "center",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <img
+                src={character.image}
+                alt={character.name}
+                style={{ borderRadius: 10, width: "100%" }}
+              />
+              <h3>{character.name}</h3>
+              <p>{character.status}</p>
+              <p>{character.species}</p>
+              <p>{character.gender}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default CharacterSearch;
+
+//i made the first search bar translate to the 2nd
+/* import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import Portal from "../assets/portal-circle.png";
 
 function CharacterSearch() {
   const [query, setQuery] = useState("");
@@ -56,6 +170,7 @@ function CharacterSearch() {
         type="text"
         placeholder="Hamurai"
         className="explore__search--bar"
+        backgroundUrl={Portal}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         autoFocus
@@ -108,6 +223,7 @@ function CharacterSearch() {
 }
 
 export default CharacterSearch;
+ */
 
 //before i made these clickable tooards that link to detailed character page
 /* import React, { useState, useEffect, useCallback } from "react";

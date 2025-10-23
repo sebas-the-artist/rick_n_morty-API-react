@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
-import spaceBg from "../assets/space__bg.jpeg";
+import spaceBg from "../assets/portal-circle.png";
 import PortalCircle from "../assets/portal-circle.png";
 import { Link } from "react-router-dom";
 
@@ -8,11 +8,11 @@ const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navStyle = {
-    width: "100%",
+    /*   width: "100%",
     backgroundImage: `url(${spaceBg})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    zIndex: 3,
+    zIndex: 3, */
   };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
