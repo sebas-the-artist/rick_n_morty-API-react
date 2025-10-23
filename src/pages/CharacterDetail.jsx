@@ -69,8 +69,36 @@ function CharacterDetail() {
 
         {/* Main content flex container */}
         <div className="detail__content">
-          {/* Left side: vertical stack of image then episodes */}
           <div className="detail__left">
+            <div
+              className="detail__img-wrapper"
+              style={{ position: "relative", display: "inline-block" }}
+            >
+              <img
+                src={character.image}
+                alt={character.name}
+                className="detail__img"
+              />
+              {character.status === "Dead" && (
+                <div className="detail__dead-bar">DEAD</div>
+              )}
+            </div>
+            {/* your episodes list */}
+            <div className="detail__episodes">
+              <h3 className="detail__episodes--header">
+                Episodes Appeared In (First 4):
+              </h3>
+              <ul>
+                {episodes.map((ep) => (
+                  <li key={ep.id}>
+                    {ep.episode} - {ep.name} ({ep.air_date})
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* <div className="detail__left">
             <img
               src={character.image}
               alt={character.name}
@@ -89,7 +117,7 @@ function CharacterDetail() {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
 
           {/* Right side: character info */}
           <div className="detail__right">

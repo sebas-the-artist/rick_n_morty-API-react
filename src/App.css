@@ -127,7 +127,7 @@ nav,
 /* Animation keyframes for scrolling */
 @keyframes scroll-text {
   0% {
-    transform: translateX(50%);
+    transform: translateX(45%);
   }
   100% {
     transform: translateX(-70%);
@@ -911,6 +911,7 @@ k */
 }
 .detail__episodes--header {
   padding-bottom: 16px;
+  padding-bottom: 12px;
 }
 .detail__about {
   max-width: 800px;
@@ -938,11 +939,43 @@ k */
   margin-bottom: 20px;
   box-shadow: 0 0 15px rgba(0, 255, 100, 0.5);
   box-shadow: 0 0 15px #242424;
+
+  display: flex;
+  align-items: stretch;
   /*   border-radius: 10px;
   width: 100%;
   max-width: 250px;
   display: block;
   margin: 0 auto 1rem; */
+}
+
+.detail__img-wrapper {
+  /*  position: relative;
+  display: inline-block; */
+}
+
+.detail__dead-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.75);
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 6px 0;
+  opacity: 0;
+  transform: translateY(300%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* to not block hover */
+}
+
+.detail__img-wrapper:hover .detail__dead-bar {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .detailed__details p {
@@ -973,7 +1006,7 @@ k */
   align-items: center;
   align-items: start;
   width: 100%;
-  max-width: 950px;
+  max-width: 850px;
   /* margin: 20px auto 30px; */
   padding: 10px 20px;
   font-size: 32px;
@@ -990,9 +1023,7 @@ k */
   cursor: pointer;
   font-size: 2rem;
   transition: transform 0.2s ease, color 0.3s ease;
-  color: black;
-  -webkit-text-fill-color: white;
-  -webkit-text-stroke: 1px rgb(121, 252, 111);
+  color: rgb(121, 252, 111);
 }
 
 .detail__button:hover {
@@ -1018,6 +1049,7 @@ k */
 }
 
 .falling {
+  color: black;
 }
 /* Dark mode general styling */
 body.dark__mode {
@@ -1199,6 +1231,7 @@ body.dark__mode .falling {
   .detail__left {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
   }
   .detail__img {
