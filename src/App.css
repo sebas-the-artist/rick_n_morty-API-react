@@ -1008,6 +1008,23 @@ k */
 //
  */
 
+.skeleton__fall--portal {
+}
+.skeleton__wrapper {
+  text-align: center;
+}
+
+/* 
+//
+///
+//
+//
+//
+//
+/
+//
+ */
+
 body.dark__mode {
   background-color: #0d0d0d;
   /*  color: #b4fcb4; */

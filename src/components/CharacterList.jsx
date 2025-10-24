@@ -1,6 +1,171 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import FallPortal from "../assets/falling-portal.png";
+
+const ITEMS_PER_PAGE = 24;
+
+function CharacterList() {
+  const [allCharacters, setAllCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("all");
+
+  const totalPages = Math.ceil(allCharacters.length / ITEMS_PER_PAGE);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch all pages on mount
+  useEffect(() => {
+    const fetchAllCharacters = async () => {
+      setIsLoading(true);
+      let accumulated = [];
+      let currentPage = 1;
+      let pages = 1;
+
+      try {
+        do {
+          const response = await fetch(
+            `https://rickandmortyapi.com/api/character?page=${currentPage}`
+          );
+          const data = await response.json();
+          accumulated = [...accumulated, ...data.results];
+          pages = data.info.pages;
+          currentPage++;
+        } while (currentPage <= pages);
+
+        setAllCharacters(accumulated);
+      } catch (error) {
+        console.error("Error fetching characters:", error);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchAllCharacters();
+  }, []);
+
+  // Filter characters globally
+  const filteredCharacters = allCharacters.filter((character) => {
+    if (filter === "all") return true;
+    if (filter === "alive") return character.status.toLowerCase() === "alive";
+    if (filter === "dead") return character.status.toLowerCase() === "dead";
+    return true;
+  });
+
+  // Sort filtered characters globally
+  filteredCharacters.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (filter === "A-Z") {
+      return nameA.localeCompare(nameB);
+    } else if (filter === "Z-A") {
+      return nameB.localeCompare(nameA);
+    } else {
+      return 0;
+    }
+  });
+
+  // Paginate the filtered & sorted list
+  const pagedCharacters = filteredCharacters.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE
+  );
+
+  const nextPage = () => {
+    if (page < totalPages) setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
+  const onFilterChange = (value) => {
+    setFilter(value);
+    setPage(1); // reset to first page on filter change
+  };
+
+  if (isLoading) {
+    return (
+      <div className="skeleton__wrapper">
+        <img
+          src={FallPortal}
+          className="skeleton__fall--portal"
+          alt="Loading..."
+        />
+        {/* Or replace with a Skeleton component if you have one */}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Filter UI */}
+      <div className="wrapper__2">
+        <div className="filter__wrapper">
+          <label htmlFor="filter" className="filter__header">
+            Filter:
+          </label>
+          <select
+            id="filter"
+            value={filter}
+            onChange={(e) => onFilterChange(e.target.value)}
+          >
+            <option value="all">All Characters</option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="character-page">
+        <div className="wrapper__2--grey">
+          <div className="character-container">
+            {pagedCharacters.map((character) => (
+              <Link
+                to={`/character/${character.id}`}
+                key={character.id}
+                className="character-card-link"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className="character-card">
+                  <img src={character.image} alt={character.name} />
+                  <h3>{character.name}</h3>
+                  <p>Status: {character.status}</p>
+                  <p>Species: {character.species}</p>
+                  <p>Origin: {character.origin.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Pagination */}
+        <div className="pagination">
+          <button onClick={prevPage} disabled={page === 1}>
+            Previous
+          </button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <button
+            onClick={nextPage}
+            disabled={page === totalPages || totalPages === 0}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default CharacterList;
+
+//before touching it up
+/* import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
@@ -56,7 +221,7 @@ function CharacterList() {
 
   return (
     <div>
-      {/* Filter UI */}
+
       <div className="wrapper__2">
         <div className="filter__wrapper">
           <label htmlFor="filter" className="filter__header">
@@ -98,7 +263,7 @@ function CharacterList() {
           </div>
         </div>
 
-        {/* Pagination */}
+
         <div className="pagination">
           <button onClick={prevPage} disabled={page === 1}>
             Previous
@@ -115,7 +280,7 @@ function CharacterList() {
   );
 }
 
-export default CharacterList;
+export default CharacterList; */
 
 //before i added the detailed character page
 /* 
