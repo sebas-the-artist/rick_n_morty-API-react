@@ -16,7 +16,7 @@ function Landing() {
   };
 
   const handleSearch = () => {
-    if (inputValue.trim() === "") return; // avoid empty searches
+    if (inputValue.trim() === "") return;
     setSearchTerm(inputValue);
     navigate("/Explore");
   };
@@ -60,7 +60,6 @@ function Landing() {
           <h1 className="intro__header">A Complete Character Guide</h1>
         </div>
 
-        {/* Search section */}
         <div className="intro__landing__search--bar--wrapper">
           <input
             type="text"
@@ -69,7 +68,7 @@ function Landing() {
             placeholder="Mr. Meeseeks"
             value={inputValue}
             onChange={handleChange}
-            onKeyDown={handleKeyDown} // detect Enter key
+            onKeyDown={handleKeyDown}
           />
 
           <Link
