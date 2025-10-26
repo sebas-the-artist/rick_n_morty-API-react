@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+this is a character search engine for one of my favorite shows Rick & Morty™. ive learned a few new things creating this and solidified knowledge that ive recently gained. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+(the page that has all the specific characters info when you click on their card, i called it "character details" so thats what i mean when i say that. i couldnt think of a better name)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  //  WHAT I LEARNED
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-i made a mouse tracker, onMouseMove thingy. never seen one like that. its also ricks carship from the show and i made it so theres 5 so it looks like its going super fast through space
 
-### `npm test`
+-sometimes you have to reorganize the entire page for different screen widths. i somewhat knew this but the "character details" really showed me. such weird shapes to deal with, it re-arranges maybe 3 times total and that was a pain but im a people pleaser, and user experience is a part of that.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   // ROOM FOR IMPROVEMENT
 
-### `npm run build`
+-the back button on the "character details" page. i tried to make it look like a guy falling into a portal but its not super pretty. im gonna change it so the portal appears behind him and he shrinks and opacity fades to 0. but itll do for now.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-when you go back to the character list page. from the "character details" page. it doesnt save the page youre on
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   // INTERESTING THINGS SOME MAY NOT NOTICE
+   
+    / home page
+   
+  -mouse tracker. i had to add a vertical offset because the mouse was over the image
+  
+  -the news looking bar. it was supposed to look like those bars you see at the bottom of the screen on the news like "florida man gets aligator pregnant" and it was supposed to have stuff like that. but i put that rant that was at the end of one of the episodes where he was like "rick and morty forever morty, 100 years of rick and morty just me and you..." i thought that was hi-fricking-larious
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  -the search button. it looks like hes running to the portal
 
-### `npm run eject`
+  -the news bar was also to seperate the different space images. theyre different patterns of stars, im just swaggy like that o3o
+  
+    / character list page
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  -the cards have some details on them so you know which version your looking at. thers alot of clones and alternate universes it gets confusing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  -functional filter, page selector, search bar, and skeleton loading state
+   
+    / character detail page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  -theres a dark mode, a sick one at that
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - if youre on a dead characters info page and you hover over their image it will say "dead" in this big red bar
 
-## Learn More
+  - if its in the dark mode. and you hover over the boxes with text the box shadow goes from a sci-fi green to a electric blue
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - the back button looks like a guy falling into a portal, and the portal appears when you hover over it.
+   
