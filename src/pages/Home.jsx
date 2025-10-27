@@ -281,7 +281,7 @@ const Home = () => {
             width: 10,
             height: 10,
             backgroundColor: `rgba(255, 255, 255, ${1 - i * 0.15})`,
-            backgroundColor: `rgba(255, 255, 255, ${1 - i * 0.15})`,
+            backgroundColor: `rgba(255, 255, 255, ${1 - i * 0.14})`,
             borderRadius: "50%",
             pointerEvents: "none",
             transform: "translate(-50%, -50%)",
