@@ -86,7 +86,7 @@ const Home = () => {
             height: 60,
             pointerEvents: "none",
             transform: "translate(-50%, -50%)",
-            opacity: 1 - i * 0.15,
+            opacity: 1 - i * 0.14,
             transition: "opacity 0.2s",
           }}
         />
