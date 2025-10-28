@@ -79,7 +79,7 @@ function CharacterDetail() {
 
             <div className="detail__episodes">
               <h3 className="detail__episodes--header">
-                Episodes Appeared In (First 4):
+                Episodes Appeared In:
               </h3>
               <ul>
                 {episodes.map((ep) => (
