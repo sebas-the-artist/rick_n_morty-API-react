@@ -57,19 +57,15 @@ function CharacterDetail() {
 
   return (
     <div className="detail">
-      {/* Insert your back + dark mode toggle button here */}
       <DetailBack />
 
       <div className="detail__wrapper">
-        {/* Name centered on top */}
         <div className="detail__name--wrapper">
           <h2>{character.name}</h2>
           {character.type && <h3 className="detail__type">{character.type}</h3>}
         </div>
 
-        {/* Main content flex container */}
         <div className="detail__content">
-          {/* Left side: vertical stack of image then episodes */}
           <div className="detail__left">
             <img
               src={character.image}
@@ -91,7 +87,6 @@ function CharacterDetail() {
             </div>
           </div>
 
-          {/* Right side: character info */}
           <div className="detail__right">
             <p>
               <strong>Gender:</strong> {character.gender}
