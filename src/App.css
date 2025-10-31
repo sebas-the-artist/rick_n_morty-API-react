@@ -895,12 +895,12 @@ k */
   margin: 0 auto 1rem; */
 }
 
-.detail__img-wrapper {
+.detail__img--wrapper {
   position: relative;
   display: inline-block;
 }
 
-.detail__dead-bar {
+.detail__dead--bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -918,7 +918,7 @@ k */
   pointer-events: none;
 }
 
-.detail__img-wrapper:hover .detail__dead-bar {
+.detail__img--wrapper:hover .detail__dead--bar {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;

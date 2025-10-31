@@ -67,11 +67,16 @@ function CharacterDetail() {
 
         <div className="detail__content">
           <div className="detail__left">
-            <img
-              src={character.image}
-              alt={character.name}
-              className="detail__img"
-            />
+            <div className="detail__img--wrapper">
+              <img
+                src={character.image}
+                alt={character.name}
+                className="detail__img"
+              />
+              {character.status === "Dead" && (
+                <div className="detail__dead--bar">DEAD</div>
+              )}
+            </div>
 
             <div className="detail__episodes">
               <h3 className="detail__episodes--header">
