@@ -919,7 +919,7 @@ k */
 }
 
 .detail__img--wrapper:hover .detail__dead--bar {
-  opacity: 1;
+  opacity: 0.9;
   transform: translateY(0);
   pointer-events: auto;
 }
